@@ -3,11 +3,15 @@
 import java.util.LinkedList;
 
 // name: Christopher Valerio 
-		 
-
 public class Radix {
 
 
+	/**
+	 * Accepts an array and returns the maximum numerical value from the given integer array
+	 * 
+	 * @param a - integer array given when function is called and loops through to find greatest value
+	 * @return integer value representing the maximum number from the array
+	 */
 	private int getMax(int[] a)
 	{
 
@@ -25,19 +29,31 @@ public class Radix {
 
 	}
 	
+	/**
+	 * 
+	 * @param arrayToBeSorted - passed in unsorted integer array, to be sorted via radix sort algorithm
+	 */
 	public void sort(int[] arrayToBeSorted)
 	{
-		// You will need at least the following variables:
-		
-		// an array of linked lists of size 10, up to you to determine what type
-		// you may use the built in linked list from java.util
+
+		/* 
+		  basic steps for radix sort using linked lists:
+
+		  go through numbers in arrayToBeSorted
+		  start with the right most digit in the number (least significant digit), based on the digit add the number (not just the digit)
+		  in the appropriate list in the linked list array. Do this with all the numbers.
+
+		  Once done remove items from the linked list array in order and put them in an array
+
+		  Go through that array again but now use the digit to the left (next significant digit)
+
+		  repeat process as many times as the length of the max number
+		  
+		 */
  
 		LinkedList<Integer>[] table = (LinkedList<Integer>[])new LinkedList[10]; 
-		// http://steveo.us/howtos/java-ds.html
-		// https://docs.oracle.com/javase/8/docs/api/java/util/LinkedList.html
-	
 		
-		// a var to keep track of the current radix
+		// int variable to keep track of the current radix value
 		int radix = 1;
 		int maxNum = getMax(arrayToBeSorted);
 		//System.out.println("\nMaxNum: " + maxNum);
@@ -65,11 +81,6 @@ public class Radix {
 					table[indexRadix].addLast(arrayToBeSorted[j]);
 			}
 			
-			//System.out.println("\nCurrent Radix Table: ");
-			//for(int z = 0; z < table.length; z++) {
-				//System.out.println(table[z]);
-			//}
-			
 			int index = 0;
 			for(int k = 0; k < table.length; k++) {
 				
@@ -80,28 +91,7 @@ public class Radix {
 				}
 
 			}
-			
-		//	StringBuilder str = new StringBuilder();
-		//	for(int z = 0; z < reArrange.length; ) {
-		//		str.append(reArrange[z++]);
-		//		str.append(", ");
-		//	}
-			//System.out.println("\nValues after dequeue: \n" + str.toString());
 			radix *= 10;
 		}
-		/* 
-		  basic steps for radix sort using linked lists:
-
-		  go through numbers in arrayToBeSorted
-		  start with the right most digit in the number (least significant digit), based on the digit add the number (not just the digit)
-		  in the appropriate list in the linked list array. Do this with all the numbers.
-
-		  Once done remove items from the linked list array in order and put them in an array
-
-		  Go through that array again but now use the digit to the left (next significant digit)
-
-		  repeat process as many times as the length of the max number
-		  
-		 */
 	}	
 }
